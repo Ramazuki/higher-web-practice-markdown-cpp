@@ -17,3 +17,11 @@ target_link_libraries(
         PRIVATE
         MarkdownConverter
 )
+
+add_executable(MarkdownTests tests/test_main.cpp)
+
+target_link_libraries(
+        MarkdownTests
+        PRIVATE
+        MarkdownConverter
+)

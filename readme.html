@@ -1,0 +1,48 @@
+<!-- Generated with this app -->
+<h1>MarkdownToHTML Converter</h1>
+<p>CLI-приложение для конвертации упрощённого Markdown в HTML.</p>
+<h2>Возможности</h2>
+<p>Поддерживаемые конструкции Markdown:</p>
+<ul>
+  <li><strong>Заголовки</strong> — <code>#</code>, <code>##</code>, <code>###</code></li>
+  <li><strong>Параграфы</strong> — несколько строк склеиваются в один абзац</li>
+  <li><strong>Нумерованные списки</strong> — <code>1. ...</code>, <code>2. ...</code></li>
+  <li><strong>Маркированные списки</strong> — <code>- ...</code> или <code>* ...</code></li>
+  <li><strong>Жирный текст</strong> — <code>**bold**</code></li>
+  <li><strong>Курсив</strong> — <code>*italic*</code></li>
+  <li><strong>Инлайн-код</strong> — <code></code> <code>code</code> <code></code></li>
+  <li><strong>Ссылки</strong> — <code>[текст](url)</code></li>
+  <li><strong>Экранирование</strong> — <code>*</code>, <code>&lt;</code>, <code>&gt;</code> и другие спецсимволы</li>
+  <li><strong>HTML-экранирование</strong> — <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&quot;</code> в выводе</li>
+</ul>
+<p>Непарные маркеры (<code>*</code>, <code>**</code>, <code></code> <code> </code><code>, </code>`[) трактуются как обычный текст.</p>
+<h2>Сборка</h2>
+<p>Требования: <code>cmake</code> &gt;= 3.30, компилятор C++20.</p>
+<p><code></code><code>bash cmake -B build -S . cmake --build build --parallel </code><code></code></p>
+<p>Или одной командой:</p>
+<p><code></code><code>bash ./build.sh </code><code></code></p>
+<h2>Использование</h2>
+<p>Вывод в stdout:</p>
+<p><code></code><code>bash ./build/MarkdownToHTML --in examples/input.md </code><code></code></p>
+<p>Запись в файл:</p>
+<p><code></code><code>bash ./build/MarkdownToHTML --in examples/input.md --out result.html </code><code></code></p>
+<h3>Пример</h3>
+<p>Вход (<code>examples/input.md</code>):</p>
+<p><code></code>`markdown</p>
+<h1>Заголовок</h1>
+<p>Текст с <em>курсивом</em>, <strong>жирным</strong> и <code>кодом</code>.</p>
+<ul>
+  <li>Пункт A</li>
+  <li>Пункт B</li>
+</ul>
+<p>Ссылка: <a href="https://example.org">поиск</a></p>
+<p>Экранирование: *звёздочки* и &lt;скобки&gt;. <code></code>`</p>
+<p>Выход:</p>
+<p><code></code><code>html &lt;h1&gt;Заголовок&lt;/h1&gt; &lt;p&gt;Текст с &lt;em&gt;курсивом&lt;/em&gt;, &lt;strong&gt;жирным&lt;/strong&gt; и &lt;code&gt;кодом&lt;/code&gt;.&lt;/p&gt; &lt;ul&gt;   &lt;li&gt;Пункт A&lt;/li&gt;   &lt;li&gt;Пункт B&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;Ссылка: &lt;a href=&quot;https://example.org&quot;&gt;поиск&lt;/a&gt;&lt;/p&gt; &lt;p&gt;Экранирование: *звёздочки* и &amp;lt;скобки&amp;gt;.&lt;/p&gt; </code><code></code></p>
+<h2>Тестирование</h2>
+<p>Запуск всех тестов:</p>
+<p><code></code><code>bash ./run_tests.sh </code><code></code></p>
+<p>Только юнит-тесты:</p>
+<p><code></code><code>bash cmake --build build --parallel ./build/MarkdownTests </code><code></code></p>
+<h2>Структура проекта</h2>
+<p><code></code><code> ├── main.cpp                 # CLI-приложение ├── converter/ │   ├── scanner.h / .cpp     # Блочный парсинг (сканер) │   ├── inline_parser.h / .cpp # Инлайн-парсер │   ├── renderer.h / .cpp    # HTML-рендерер │   └── utils.h / .cpp       # Утилиты ├── tests/ │   ├── test_main.cpp        # Юнит-тесты │   ├── tests.md             # Тестовый вход │   └── expected.html        # Эталонный выход ├── examples/ │   └── input.md             # Пример входного файла ├── build.sh                 # Скрипт сборки ├── run.sh                   # Скрипт запуска ├── build_and_run.sh         # Сборка + запуск └── run_tests.sh             # Запуск тестов </code><code></code></p>
